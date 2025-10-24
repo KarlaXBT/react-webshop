@@ -1,42 +1,78 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App container: full viewport height, vertical layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ensures full viewport height */
+  background-color: #f8f9fa; /* light background similar to CRA starter */
+}
+
+/* Main content grows to fill space between Navbar & Footer */
+.app-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem; /* optional padding for page content */
+}
+
+/* Footer default style */
+footer {
+  background-color: #343a40; /* slightly dark footer like Bootstrap default */
+  color: #fff;
+  padding: 2rem 1rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+footer a {
+  color: #fff;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer a:hover {
+  text-decoration: underline;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Hero Section */
+.home-hero {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 60vh;
+  background: url("https://plus.unsplash.com/premium_photo-1681487933632-c9eda34fcaf1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170")
+    center/cover no-repeat;
+  color: #fff;
+  padding: 3rem 1rem;
 }
 
-.card {
-  padding: 2em;
+.home-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 
-.read-the-docs {
-  color: #888;
+.home-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  margin-bottom: 1.5rem;
+}
+
+.hero-button {
+  font-size: 1.2rem;
+  padding: 0.75rem 2rem;
 }

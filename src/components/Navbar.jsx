@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+// use whatever name for bootstrap component import
 import RBNavbar from "react-bootstrap/Navbar";
 function Navbar() {
   return (
     <RBNavbar bg="light" expand="lg" className="shadow-sm">
       <Container>
-        {/* Brand / Logo */}
+        {/* brand and logo */}
         <RBNavbar.Brand as={Link} to="/">
-          React Webshop
+          PowerShop
         </RBNavbar.Brand>
 
         {/* Toggler for mobile view */}
