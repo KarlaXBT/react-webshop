@@ -10,10 +10,10 @@ function CartPage() {
   const navigate = useNavigate();
 
   // reduceme cart arrayst kõikide objektide kogusumma
-  const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  // const totalPrice = cart.reduce(
+  //   (sum, item) => sum + item.price * item.quantity,
+  //   0
+  // );
   // funktsioonid et suurendada ja vähendada toodete koguseid, noolefunktsioonid
   const increment = (item) => addToCart({ ...item, quantity: 1 });
   const decrement = (item) => {
@@ -79,8 +79,18 @@ function CartPage() {
           ))}
 
           <Row className="mt-4 justify-content-end">
-            <Col xs={12} md={4} className="text-end">
-              <h4>Total: ${totalPrice.toFixed(2)}</h4>
+            <Col
+              xs={12}
+              md={4}
+              className="text-end d-flex flex-column flex-sm-row justify-content-end gap-2"
+            >
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => navigate("/products")}
+              >
+                Back to Products
+              </Button>
               <Button
                 variant="success"
                 size="lg"

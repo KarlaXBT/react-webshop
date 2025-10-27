@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Checkout from "./pages/Checkout";
 import ThankYou from "./pages/ThankYou";
+import Contact from "./pages/Contact";
 
 // App component always gets rendered
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/thankyou" element={<ThankYou />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <ToastContainer position="top-right" autoClose={2000} />
       </main>
