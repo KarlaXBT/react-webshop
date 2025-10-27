@@ -11,6 +11,9 @@ import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Checkout from "./pages/Checkout";
+import ThankYou from "./pages/ThankYou";
+
 // App component always gets rendered
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/thankyou" element={<ThankYou />} />
         </Routes>
         <ToastContainer position="top-right" autoClose={2000} />
       </main>

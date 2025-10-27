@@ -1,10 +1,13 @@
 import { useContext } from "react";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 function CartPage() {
   // destruktureeritud asjad mis kontekstist saame, et siin komponendis kasutada
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
+
+  const navigate = useNavigate();
 
   // reduceme cart arrayst kõikide objektide kogusumma
   const totalPrice = cart.reduce(
@@ -78,7 +81,11 @@ function CartPage() {
           <Row className="mt-4 justify-content-end">
             <Col xs={12} md={4} className="text-end">
               <h4>Total: ${totalPrice.toFixed(2)}</h4>
-              <Button variant="success" size="lg">
+              <Button
+                variant="success"
+                size="lg"
+                onClick={() => navigate("/checkout")}
+              >
                 Proceed to Checkout
               </Button>
             </Col>

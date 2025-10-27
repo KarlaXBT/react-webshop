@@ -40,7 +40,7 @@ function CartProvider({ children }) {
   }
   return (
     // mehhanism et jagada neid  asju alamkomponentidele
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, setCart, addToCart, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );
