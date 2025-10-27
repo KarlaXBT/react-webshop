@@ -21,7 +21,8 @@ function Checkout() {
   useEffect(() => {
     fetch("https://www.omniva.ee/locations.json")
       .then((res) => res.json())
-      .then((data) => setPakiautomaadid(data));
+      .then((data) => setPakiautomaadid(data))
+      .catch((err) => console.error("Error fetching lockers:", err));
   }, []);
 
   const handleChange = (e) =>
@@ -29,7 +30,7 @@ function Checkout() {
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const handlePayment = async () => {
+  const handlePayment = () => {
     if (!form.name || !form.email || !form.address) {
       toast.error("Please fill in all required fields");
       return;
@@ -39,42 +40,49 @@ function Checkout() {
       return;
     }
 
+    const url = "https://igw-demo.every-pay.com/api/v4/payments/oneoff";
+
     const payload = {
       account_name: "EUR3D1",
       nonce: "asdsad" + Math.random() + new Date(),
       timestamp: new Date(),
-      amount: total.toFixed(2),
-      order_reference: "order" + Math.random() * 999,
-      customer_url: "http://localhost:5173/thankyou",
+      amount: total, // demo API seems to accept number
+      order_reference: "order" + Math.floor(Math.random() * 999),
+      customer_url: "https://example.com", // your local dev port
       api_username: "e36eb40f5ec87fa2",
       customer_email: form.email,
       customer_name: form.name,
       pickup_location: selectedLocker,
     };
 
-    try {
-      toast.info("Processing payment...");
-      const res = await fetch(
-        "https://igw-demo.every-pay.com/api/v4/payments/oneoff",
-        {
-          method: "POST",
-          headers: {
-            Authorization:
-              "Basic ZTM2ZWI0MGY1ZWM4N2ZhMjo3YjkxYTNiOWUxYjc0NTI0YzJlOWZjMjgyZjhhYzhjZA==",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization:
+          "Basic ZTM2ZWI0MGY1ZWM4N2ZhMjo3YjkxYTNiOWUxYjc0NTI0YzJlOWZjMjgyZjhhYzhjZA==",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
 
-      const data = await res.json();
-      setCart([]);
-      localStorage.removeItem("cart");
-      window.location.href = data.payment_link;
-    } catch (err) {
-      console.error(err);
-      toast.error("Payment failed. Please try again.");
-    }
+    toast.info("Processing payment...");
+
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log("Payment API response:", json);
+        const paymentLink =
+          json.payment_link || "http://localhost:5174/thankyou";
+        // Clear cart before redirect
+        setCart([]);
+        localStorage.removeItem("cart");
+        window.location.href = paymentLink;
+      })
+      .catch((err) => {
+        console.error("Payment error:", err);
+        toast.error("Payment failed. Redirecting to thank you page.");
+        window.location.href = "http://localhost:5174/thankyou";
+      });
   };
 
   return (
