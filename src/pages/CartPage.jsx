@@ -3,13 +3,15 @@ import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 
 function CartPage() {
+  // destruktureeritud asjad mis kontekstist saame, et siin komponendis kasutada
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
 
+  // reduceme cart arrayst kõikide objektide kogusumma
   const totalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-
+  // funktsioonid et suurendada ja vähendada toodete koguseid, noolefunktsioonid
   const increment = (item) => addToCart({ ...item, quantity: 1 });
   const decrement = (item) => {
     if (item.quantity > 1) addToCart({ ...item, quantity: -1 });
@@ -20,6 +22,7 @@ function CartPage() {
     <Container className="py-5 flex-grow-1">
       <h1 className="mb-4">Your Shopping Cart</h1>
 
+      {/* kontrollime kas cart arrays on midagi, kui ei ole siis kuvame selle paragraafi, vastasel juhul mapime cart itemid */}
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -30,11 +33,7 @@ function CartPage() {
               className="align-items-center mb-3 p-3 border rounded flex-wrap"
             >
               <Col xs={12} md={2} className="text-center mb-2 mb-md-0">
-                <Image
-                  src={item.image || "https://via.placeholder.com/100"}
-                  fluid
-                  rounded
-                />
+                <Image src={item.image} fluid rounded />
               </Col>
               <Col xs={12} md={4}>
                 <h5>{item.name}</h5>

@@ -8,6 +8,7 @@ function ProductCard({ product }) {
     // uses bootstrap classes ex. m-2 for margin, variant is bootstrap prop,
     // ok to use inline styles
     <Card className="m-2 shadow-sm" style={{ maxWidth: "18rem" }}>
+      {/* custom URL from product.id */}
       <Link
         to={`/product/${product.id}`}
         className="text-decoration-none text-dark"

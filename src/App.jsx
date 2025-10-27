@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Footer from "./components/Footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // App component always gets rendered
 function App() {
@@ -25,6 +27,7 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/admin" element={<Admin />} />
         </Routes>
+        <ToastContainer position="top-right" autoClose={2000} />
       </main>
 
       <Footer />

@@ -5,10 +5,14 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 
 function ProductDetails() {
+  // useparams et luua id põhjal muutujatega URLid
   const { id } = useParams();
+  //otsime id põhjal õige toote mida kuvada
   const product = productsData.find((p) => p.id === parseInt(id));
 
+  // funktsioon kontekstist et korvi lisada
   const { addToCart } = useContext(CartContext);
+
   const [quantity, setQuantity] = useState(1);
 
   const navigate = useNavigate();

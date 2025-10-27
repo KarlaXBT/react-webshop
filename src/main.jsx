@@ -7,11 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CartProvider from "./context/CartProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </BrowserRouter>
-  </StrictMode>
+  <BrowserRouter>
+    <CartProvider>
+      <App />
+    </CartProvider>
+  </BrowserRouter>
 );

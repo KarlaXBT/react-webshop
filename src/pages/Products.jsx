@@ -4,12 +4,12 @@ import productsData from "../data/products.json";
 import ProductCard from "../components/ProductCard";
 
 function Products() {
-  const [products, setProducts] = useState(productsData);
+  const [products] = useState(productsData);
 
   return (
     <Container className="py-4">
       <h2 className="text-center mb-4">Our Products</h2>
-
+      {/* mapime kõik andmed bootstrapi kaartideks alg andmed tulevad JSON failist */}
       <Row>
         {products.map((product) => (
           <Col
