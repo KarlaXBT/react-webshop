@@ -1,14 +1,14 @@
-// these bootstrap components have sub-components like Card.Body etc
+// Bootstrapi komponendid, neil on oma alamkompionendid nt card.title jne
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-// product passed as prop, is object that has data for every card
+// product passitud propina, saame selle objekti andmeid kasutada iga kaardi jaoks
 function ProductCard({ product }) {
   return (
-    // uses bootstrap classes ex. m-2 for margin, variant is bootstrap prop,
-    // ok to use inline styles
+    // kasutame ka bootstrapi klasse className "m-2" jne
+    // ok kasutada inline stiile
     <Card className="m-2 shadow-sm" style={{ maxWidth: "18rem" }}>
-      {/* custom URL from product.id */}
+      {/* teeme custom lingi useParamise jaoks kasutame template literali */}
       <Link
         to={`/product/${product.id}`}
         className="text-decoration-none text-dark"

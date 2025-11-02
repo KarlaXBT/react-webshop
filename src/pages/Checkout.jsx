@@ -3,9 +3,10 @@ import { CartContext } from "../context/CartContext";
 import { toast } from "react-toastify";
 
 function Checkout() {
+  // ostukorv kontekstist, order summary jaoks
   const { cart, setCart } = useContext(CartContext);
 
-  // Billing form state
+  // kontaktanmete vormi state, et hoida andmeid
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -13,11 +14,12 @@ function Checkout() {
     phone: "",
   });
 
-  // Pickup lockers state
+  // valitud automaat, kontrollitud inputist
   const [selectedLocker, setSelectedLocker] = useState("");
+  // state, array kuhu salvestada APIst fetchitud automaadid
   const [pakiautomaadid, setPakiautomaadid] = useState([]);
 
-  // Fetch lockers
+  // fetchime automaadid
   useEffect(() => {
     fetch("https://www.omniva.ee/locations.json")
       .then((res) => res.json())
@@ -25,11 +27,16 @@ function Checkout() {
       .catch((err) => console.error("Error fetching lockers:", err));
   }, []);
 
+  //  funktsioon mis uuendab kontaktandmete state, uuendab muutunud välja
+  // e.target.name on objekti key
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  // arvutab kogu ostukorvi summa kokku
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  // funktsioon kontrollib et kõik andmete vormi kastid oleks õigesti täidetud
+  // ja pakiautomaat valitud
   const handlePayment = () => {
     if (!form.name || !form.email || !form.address) {
       toast.error("Please fill in all required fields");
@@ -40,6 +47,7 @@ function Checkout() {
       return;
     }
 
+    // makse API aadress kuhu saab POST päringut teha, demo link testimiseks
     const url = "https://igw-demo.every-pay.com/api/v4/payments/oneoff";
 
     const payload = {
@@ -67,6 +75,7 @@ function Checkout() {
 
     toast.info("Processing payment...");
 
+    // saaab päringu makse APIle
     fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
@@ -89,7 +98,7 @@ function Checkout() {
     <div className="container my-5">
       <h2 className="mb-4">Checkout</h2>
       <div className="row">
-        {/* Left: Billing + Pickup */}
+        {/* ostja andmed inputtidest ja pakiautomaadi valik*/}
         <div className="col-md-6">
           <div className="card p-4 mb-4">
             <h4 className="mb-3">Billing Information</h4>
@@ -138,7 +147,7 @@ function Checkout() {
               />
             </div>
 
-            {/* Pickup locker */}
+            {/* pakiautomaadi valikmine*/}
             <div className="mb-3">
               <label className="form-label">Select Pickup Location</label>
               <select
@@ -147,6 +156,7 @@ function Checkout() {
                 onChange={(e) => setSelectedLocker(e.target.value)}
               >
                 <option value="">Select a locker</option>
+                {/* mapime APIst tulevad automaadid  */}
                 {pakiautomaadid.map((a) => (
                   <option key={a.ZIP} value={a.NAME}>
                     {a.NAME}
@@ -165,7 +175,7 @@ function Checkout() {
           </div>
         </div>
 
-        {/* Right: Cart Summary */}
+        {/* ostukorvi kogu andmed asjad, kogused ja kokku */}
         <div className="col-md-6">
           <div className="card p-4">
             <h4 className="mb-3">Order Summary</h4>
@@ -181,7 +191,7 @@ function Checkout() {
                     <div>
                       {item.name} x {item.quantity}
                     </div>
-                    <div>{(item.price * item.quantity).toFixed(2)}€</div>
+                    <div>{total.toFixed(2)}€</div>
                   </div>
                 ))}
                 <hr />

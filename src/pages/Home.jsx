@@ -1,6 +1,8 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// hero sektsioon
+
 function Home() {
   return (
     <section className="home-hero">

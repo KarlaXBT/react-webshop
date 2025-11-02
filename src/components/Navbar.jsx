@@ -44,9 +44,9 @@ function Navbar() {
               )}
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/admin">
+            {/* <Nav.Link as={Link} to="/admin">
               Admin
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link as={Link} to="/contact">
               Contact
             </Nav.Link>

@@ -10,20 +10,16 @@ import ProductDetails from "./pages/ProductDetails";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Checkout from "./pages/Checkout";
 import ThankYou from "./pages/ThankYou";
 import Contact from "./pages/Contact";
 
-// App component always gets rendered
 function App() {
   return (
     <div className="app-container">
-      {/* navbar and footer always show */}
       <Navbar />
-
       <main className="app-content">
-        {/* Routes are special component, checks what component to render based on url */}
+        {/* Routsid vaatavad URLi põhjal mis komponenti renderdada*/}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
@@ -34,9 +30,9 @@ function App() {
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+
         <ToastContainer position="top-right" autoClose={2000} />
       </main>
-
       <Footer />
     </div>
   );

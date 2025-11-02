@@ -1,4 +1,4 @@
 import { createContext } from "react";
 
-// creates a context object  (the box)
+// loome contexti objekti, see nagu portaal või kast
 export const CartContext = createContext();

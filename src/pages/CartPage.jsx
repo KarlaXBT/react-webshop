@@ -25,7 +25,7 @@ function CartPage() {
     <Container className="py-5 flex-grow-1">
       <h1 className="mb-4">Your Shopping Cart</h1>
 
-      {/* kontrollime kas cart arrays on midagi, kui ei ole siis kuvame selle paragraafi, vastasel juhul mapime cart itemid */}
+      {/* kontrollime kas cart arrays on midagi, kui ei ole siis kuvame selle  teksti, vastasel juhul mapime cart itemid */}
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (

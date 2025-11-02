@@ -3,7 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import productsData from "../data/products.json";
 import ProductCard from "../components/ProductCard";
 
+//
 function Products() {
+  // products muutuja, algsed andmed tulevad kohalikust "andmebaasist",  lihtsalt .json fail
   const [products] = useState(productsData);
 
   return (
@@ -19,6 +21,7 @@ function Products() {
             md={4}
             className="d-flex justify-content-center"
           >
+            {/* passime igale ProductCard komponendile objekti */}
             <ProductCard product={product} />
           </Col>
         ))}
